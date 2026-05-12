@@ -1,91 +1,67 @@
 # ProcessProxy Desk
 
-ProcessProxy Desk 是一个面向 Windows 的桌面工具，用来为不同应用进程配置不同的网络代理。它提供可视化界面、进程规则管理、代理节点配置、TUN 分流启动、流量监控和诊断能力。
+ProcessProxy Desk 是一款面向 Windows 的进程级代理分流桌面应用。它可以让不同应用进程使用不同的 HTTP / HTTPS / SOCKS5 代理，并提供清晰的图形界面来管理进程规则、代理节点、真实分流状态和流量监控。
 
-> 当前版本聚焦 Windows x64，并使用内置 Mihomo TUN 模式实现真实按进程分流。
+当前版本使用内置 Mihomo TUN 核心实现真实按进程分流，适合需要让浏览器、聊天工具、开发工具、游戏平台等不同软件走不同代理策略的 Windows 用户。
 
-## 功能特性
+## 下载与安装
 
-- 按进程名配置分流规则，例如让 `chrome.exe`、`wechat.exe`、`slack.exe` 使用不同代理。
-- 支持 HTTP、HTTPS、SOCKS5 代理节点。
-- 内置 Mihomo Windows x64 核心，通过 TUN 模式接管网络。
-- 运行进程列表支持按应用组展开，并合并同一路径下的同名 exe 多 PID。
-- 重复添加进程规则时会提示或阻止，避免规则混乱。
-- 流量监控区分“已使用代理的进程”和“直连 / 未使用代理的进程”。
-- 显示实时上下行速率、累计上下行流量、连接数量和当前代理链路。
-- 诊断管理员权限、内置核心、代理节点和规则有效性。
-- Windows 安装包支持选择安装路径。
+请在 GitHub Releases 下载最新安装包：
 
-## 截图
-
-可以在发布前把截图放到 `docs/images/`，然后在这里引用：
-
-```md
-![总览](docs/images/overview.png)
-![进程规则](docs/images/rules.png)
-![流量监控](docs/images/monitor.png)
+```text
+ProcessProxy Desk Setup 0.1.0.exe
 ```
+
+安装包支持安装向导和自定义安装路径。普通用户不需要提前安装 Node.js、Electron 或 Mihomo。
+
+安装和启动真实 TUN 分流时，Windows 可能会弹出管理员权限确认，这是因为 TUN 分流需要创建虚拟网络接口并写入必要路由。
+
+## 适用场景
+
+- 让浏览器走一个代理，聊天软件走另一个代理。
+- 让某些开发工具走代理，其他软件保持直连。
+- 按 exe 进程名快速添加分流规则。
+- 查看当前哪些进程正在走代理，哪些进程仍然直连。
+- 观察每个进程的实时上下行速率和累计流量。
+
+## 主要功能
+
+- 进程规则：按 exe 文件名配置“走代理 / 直连 / 阻断”策略。
+- 代理节点：支持 HTTP、HTTPS、SOCKS5。
+- 真实分流：通过内置 Mihomo TUN 模式接管网络。
+- 运行进程：按应用组展开显示，并合并同一路径下同名 exe 的多个 PID。
+- 防重复规则：重复添加同一 exe 时会提示或阻止。
+- 流量监控：区分“已使用代理的进程”和“直连 / 未使用代理的进程”。
+- 统计信息：显示实时上下行速率、累计流量、连接数和当前代理链路。
+- 诊断工具：检查管理员权限、内置核心、代理节点和规则有效性。
+- Windows 安装包：支持选择安装路径、桌面快捷方式和开始菜单快捷方式。
+
+## 快速使用
+
+1. 下载并安装 `ProcessProxy Desk Setup 0.1.0.exe`。
+2. 启动 ProcessProxy Desk。
+3. 打开“代理节点”，添加可用的 HTTP / HTTPS / SOCKS5 代理。
+4. 打开“进程规则”，从运行进程中选择应用，或手动输入 exe 文件名。
+5. 点击“保存并应用”。
+6. 点击“启动真实分流”。
+7. 打开“流量监控”查看代理进程、直连进程和实时流量。
 
 ## 系统要求
 
 - Windows 10 / Windows 11 x64
-- 管理员权限，用于启动 TUN 分流和写入必要路由
+- 管理员权限，用于启动 TUN 分流
 - 可用的 HTTP / HTTPS / SOCKS5 代理节点
 
-安装包已经包含 Electron 运行时和 Mihomo 核心，不需要用户额外安装 Node.js。
+## 当前限制
 
-## 快速开始
-
-### 使用安装包
-
-1. 从 Release 下载 `ProcessProxy Desk Setup 0.1.0.exe`。
-2. 运行安装包，根据安装向导选择安装路径。
-3. 启动 ProcessProxy Desk。
-4. 在“代理节点”中配置可用代理。
-5. 在“进程规则”中选择运行进程或手动添加 exe 名。
-6. 点击“保存并应用”。
-7. 点击“启动真实分流”。
-
-### 本地开发运行
-
-```powershell
-npm install
-npm run dev
-```
-
-### 构建 Windows 安装包
-
-```powershell
-npm run build
-```
-
-构建产物位于 `release/`：
-
-- `release/ProcessProxy Desk Setup 0.1.0.exe`
-- `release/win-unpacked/ProcessProxy Desk.exe`
-
-## 文档
-
-- [安装说明](docs/INSTALL.md)
-- [使用指南](docs/USAGE.md)
-- [开发说明](docs/DEVELOPMENT.md)
-- [Mihomo 核心说明](docs/MIHOMO.md)
-- [发布到 GitHub](docs/PUBLISHING.md)
-- [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
-- [常见问题](docs/FAQ.md)
-- [安全说明](SECURITY.md)
-- [贡献指南](CONTRIBUTING.md)
-- [更新日志](CHANGELOG.md)
-
-## 工作原理
-
-ProcessProxy Desk 会根据界面中的进程规则生成 Mihomo 配置，然后启动内置 Mihomo 核心。当前版本使用 TUN 模式接管网络，并通过 Mihomo 的 `PROCESS-NAME` 规则按 exe 文件名匹配进程。
-
-需要注意：当前规则粒度是 exe 文件名，不是完整路径。同一个 exe 文件名在不同目录下运行时，会命中同一条 `PROCESS-NAME` 规则。
+- 当前规则按 exe 文件名匹配，不按完整路径匹配。
+- 同名 exe 即使来自不同目录，也会命中同一条 `PROCESS-NAME` 规则。
+- 流量监控数据来自 Mihomo 本地控制接口，与 Windows 任务管理器统计口径不同。
+- 当前版本没有内置自动更新功能。
 
 ## 关于 Mihomo
 
-本项目使用 Mihomo 作为第三方网络核心。Mihomo 不属于本项目原创代码，本项目只是通过可视化界面生成配置、启动核心并读取本地控制接口数据。
+ProcessProxy Desk 使用 Mihomo 作为第三方网络核心。Mihomo 不属于本项目原创代码，本项目通过可视化界面生成配置、启动核心并读取本地控制接口数据。
 
 本仓库采用“提交 Mihomo 二进制”的方式，默认包含：
 
@@ -99,21 +75,39 @@ vendor/mihomo/mihomo-windows-amd64-v1.exe
 Mihomo Meta v1.19.24 windows amd64
 ```
 
-发布或分发安装包时，请务必确认 Mihomo 二进制文件的来源、版本和许可证要求，并在 Release 说明中标注。详见 [Mihomo 核心说明](docs/MIHOMO.md) 和 [第三方声明](THIRD_PARTY_NOTICES.md)。
+发布或分发安装包时，请同时遵守 Mihomo 上游许可证要求。详见 [Mihomo 核心说明](docs/MIHOMO.md) 和 [第三方声明](THIRD_PARTY_NOTICES.md)。
 
-## 项目结构
+## 文档
 
-```text
-ProcessProxyDesk/
-├─ src/
-│  ├─ main/          # Electron 主进程、Mihomo 启停、配置生成、流量采集
-│  ├─ preload/       # Electron preload IPC 桥接
-│  └─ renderer/      # React UI
-├─ vendor/mihomo/    # 内置 Mihomo Windows x64 核心
-├─ docs/             # 项目文档
-├─ release/          # 本地构建产物，不建议提交到 Git
-└─ package.json
+- [安装说明](docs/INSTALL.md)
+- [使用指南](docs/USAGE.md)
+- [常见问题](docs/FAQ.md)
+- [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
+- [Mihomo 核心说明](docs/MIHOMO.md)
+- [第三方声明](THIRD_PARTY_NOTICES.md)
+- [安全说明](SECURITY.md)
+- [更新日志](CHANGELOG.md)
+
+## 开发者
+
+本项目使用 Electron、React、TypeScript、Vite 和 electron-builder。
+
+```powershell
+npm install
+npm run dev
 ```
+
+构建 Windows 安装包：
+
+```powershell
+npm run build
+```
+
+更多开发和发布说明：
+
+- [开发说明](docs/DEVELOPMENT.md)
+- [发布到 GitHub](docs/PUBLISHING.md)
+- [贡献指南](CONTRIBUTING.md)
 
 ## 免责声明
 
@@ -121,4 +115,6 @@ ProcessProxyDesk/
 
 ## 许可证
 
-本项目使用 MIT License。详见 [LICENSE](LICENSE)。
+ProcessProxy Desk 源代码使用 MIT License。详见 [LICENSE](LICENSE)。
+
+随包包含的 Mihomo 受其上游许可证约束，不受本项目 MIT License 覆盖。
