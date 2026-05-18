@@ -9,7 +9,7 @@ ProcessProxy Desk 是一款面向 Windows 的进程级代理分流桌面应用�
 请在 GitHub Releases 下载最新安装包：
 
 ```text
-ProcessProxy Desk Setup 0.1.0.exe
+ProcessProxy Desk Setup 0.1.1.exe
 ```
 
 安装包支持安装向导和自定义安装路径。普通用户不需要提前安装 Node.js、Electron 或 Mihomo。
@@ -38,7 +38,7 @@ ProcessProxy Desk Setup 0.1.0.exe
 
 ## 快速使用
 
-1. 下载并安装 `ProcessProxy Desk Setup 0.1.0.exe`。
+1. 下载并安装 `ProcessProxy Desk Setup 0.1.1.exe`。
 2. 启动 ProcessProxy Desk。
 3. 打开“代理节点”，添加可用的 HTTP / HTTPS / SOCKS5 代理。
 4. 打开“进程规则”，从运行进程中选择应用，或手动输入 exe 文件名。
@@ -82,6 +82,7 @@ Mihomo Meta v1.19.24 windows amd64
 - [安装说明](docs/INSTALL.md)
 - [使用指南](docs/USAGE.md)
 - [常见问题](docs/FAQ.md)
+- [v0.1.1 发布说明](docs/RELEASE_NOTES_v0.1.1.md)
 - [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
 - [Mihomo 核心说明](docs/MIHOMO.md)
 - [第三方声明](THIRD_PARTY_NOTICES.md)

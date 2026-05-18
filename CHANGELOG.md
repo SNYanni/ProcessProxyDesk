@@ -1,6 +1,6 @@
 # 更新日志
 
-## Unreleased
+## 0.1.1
 
 - 将 Mihomo DNS 增强模式从 `fake-ip` 调整为 `redir-host`，降低未配置进程和游戏客户端在 TUN 模式下的兼容性问题。
 
